@@ -107,32 +107,32 @@ void TeleopTurtle::keyLoop()
         break;
       case KEYCODE_DOWN:
         ROS_DEBUG("scale-down");
-        l_scale_ += 0.1;
+        l_scale_ -= 0.1;
 	cout << "scale-down" << l_scale_ << endl;
         dirty = true;
         break;
       case KEYCODE_W:
         ROS_DEBUG("FRONT");
-	cout << "FRONT" << endl;
         twist.linear.x = l_scale_*1.0;
+	cout << "FRONT" << twist.linear.x << endl;
         dirty = true;
         break;
       case KEYCODE_S:
         ROS_DEBUG("BACK");
-		cout << "BACK" << endl;
         twist.linear.x = l_scale_*-1.0;
+	cout << "BACK" << twist.linear.x <<  endl;
         dirty = true;
         break;
-	  case KEYCODE_A:
-        ROS_DEBUG("CW");
-		cout << "CW" << endl;
+      case KEYCODE_A:
+        ROS_DEBUG("CCW");
         twist.angular.z = l_scale_*1.0;
+	cout << "CCW:" << twist.angular.z <<  endl;
         dirty = true;
         break;
       case KEYCODE_D:
-        ROS_DEBUG("CCW");
-	cout << "CCW" << endl;
+        ROS_DEBUG("CW");
         twist.angular.z = l_scale_*-1.0;
+	cout << "CW:" << twist.angular.z <<  endl;
         dirty = true;
         break;
       case KEYCODE_SPACE:

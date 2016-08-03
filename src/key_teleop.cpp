@@ -35,7 +35,7 @@ private:
 TeleopTurtle::TeleopTurtle():
   linear_(0),
   angular_(0),
-  l_scale_(1.1),
+  l_scale_(0.6),
   a_scale_(1.1)
 {
   nh_.param("scale_angular", a_scale_, a_scale_);
@@ -99,9 +99,21 @@ void TeleopTurtle::keyLoop()
 	geometry_msgs::Vector3 zero;
 	zero.x = zero.y = zero.z = 0.0;
     switch(c) {
+      case KEYCODE_UP:
+        ROS_DEBUG("scale-up");
+	l_scale_ += 0.1;
+        cout << "scale-up: " << l_scale_ << endl;
+        dirty = true;
+        break;
+      case KEYCODE_DOWN:
+        ROS_DEBUG("scale-down");
+        l_scale_ += 0.1;
+	cout << "scale-down" << l_scale_ << endl;
+        dirty = true;
+        break;
       case KEYCODE_W:
         ROS_DEBUG("FRONT");
-		cout << "FRONT" << endl;
+	cout << "FRONT" << endl;
         twist.linear.x = l_scale_*1.0;
         dirty = true;
         break;
@@ -117,17 +129,17 @@ void TeleopTurtle::keyLoop()
         twist.angular.z = l_scale_*1.0;
         dirty = true;
         break;
-	  case KEYCODE_D:
+      case KEYCODE_D:
         ROS_DEBUG("CCW");
-		cout << "CCW" << endl;
+	cout << "CCW" << endl;
         twist.angular.z = l_scale_*-1.0;
         dirty = true;
         break;
-	  case KEYCODE_SPACE:
-		ROS_DEBUG("STOP");
-		cout << "STOP" << endl;
+      case KEYCODE_SPACE:
+	ROS_DEBUG("STOP");
+	cout << "STOP" << endl;
         twist.linear = zero;
-		twist.angular = zero;
+	twist.angular = zero;
         dirty = true;
         break;
     }

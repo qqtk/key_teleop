@@ -8,7 +8,6 @@
 #define KEYCODE_L 0x44
 #define KEYCODE_UP 0x41
 #define KEYCODE_DOWN 0x42
-#define KEYCODE_Q 0x71
 #define KEYCODE_A 0x61
 #define KEYCODE_D 0x64
 #define KEYCODE_S 0x73
@@ -133,6 +132,20 @@ void TeleopTurtle::keyLoop()
         ROS_DEBUG("CW");
         twist.angular.z = l_scale_*-1.0;
 	cout << "CW:" << twist.angular.z <<  endl;
+        dirty = true;
+        break;
+      case KEYCODE_Q:
+        ROS_DEBUG("curveL");
+        twist.linear.x = l_scale_*1.0;
+        twist.angular.z = l_scale_*1.0;
+	cout << "curveL:v:" << twist.linear.x << "w:" << twist.angular.z <<  endl;
+        dirty = true;
+        break;
+      case KEYCODE_E:
+        ROS_DEBUG("curveR");
+        twist.linear.x = l_scale_*1.0;
+        twist.angular.z = l_scale_*-1.0;
+	cout << "curveR:v:" << twist.linear.x << "w:" << twist.angular.z <<  endl;
         dirty = true;
         break;
       case KEYCODE_SPACE:
